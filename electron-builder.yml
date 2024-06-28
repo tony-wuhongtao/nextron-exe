@@ -1,0 +1,12 @@
+appId: com.headline-edu.ai
+productName: Headline AI EXE
+copyright: Copyright © 2024 Headline
+directories:
+  output: dist
+  buildResources: resources
+files:
+  - from: .
+    filter:
+      - package.json
+      - app
+publish: null
