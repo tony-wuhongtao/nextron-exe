@@ -1,10 +1,11 @@
 'use client';
 import React from 'react';
 import axios from 'axios';
+import Link from 'next/link'
 import Loading from '../components/Loading';
 import VideoList from '../components/VideoList';
 
-const CozeHeadlinePage = () => {
+const VideosRecommendPage = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = React.useState(false);
   const [query, setQuery] = React.useState('');
@@ -15,16 +16,32 @@ const CozeHeadlinePage = () => {
     setQuery(e.target.value);
   };
 
-  const apiUrl = "http://103.213.161.39:8000/mix/aisearchznd"
+  const apiUrl = "http://103.213.161.39:8000/mix/aisearch"
 
 
+  const queryObj = {
+    "db_key":"znd_v2",
+      "top_k": 4, 
+      "vector_weight": 0.2,
+      "keyword_weight": 0.8,
+      "keyword_fields": [
+        "video_name",
+        "video_sub",
+        "video_keywords",
+        "video_knowledgePoints"
+      ]
+
+  }
   const handleSubmit = async () => {
     setIsLoading(true);
     setIsButtonDisabled(true);
     setHasRAG(true);
     setVideos([]);
 
-    axios.post(apiUrl, { query })
+    axios.post(apiUrl, Object.assign({},
+      { 
+      "query": query,     
+      },queryObj)) 
       .then((res) => {
         if (res.status === 201) {
           setHasRAG(false);
@@ -45,6 +62,9 @@ const CozeHeadlinePage = () => {
 
   return (
     <>
+      <Link href='/home' className="btn btn-outline btn-primary text-xl m-2">
+        返回首页
+      </Link>
       <div className="flex justify-center items-center">
         <div className="w-2/3 p-8 rounded-lg shadow-lg">
           <div><h1 className='font-bold text-xl text-center m-8'>同上一堂课 小学 四五六年级 语数英重难点 <br />视频课程 智能推荐</h1></div>
@@ -81,4 +101,4 @@ const CozeHeadlinePage = () => {
   );
 };
 
-export default CozeHeadlinePage;
+export default VideosRecommendPage;

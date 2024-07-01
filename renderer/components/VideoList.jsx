@@ -27,7 +27,10 @@ const VideoList = ({videos}) => {
                     <h1 className="card-title">{video.name}</h1>
                     <h2 className='card-title'>{video.teacher}</h2>
                     <div className="divider"></div>
-                    <p><b>课程介绍：</b>{video.summary}</p>
+                    <p><b>知识点</b>{video.knowledgePoints}</p>
+                    <p><b>关键字</b>{video.keywords}</p>
+                    <div className="divider"></div>
+                    <p><b>课程介绍：</b>{video.simpleSummary}</p>
                 
                 </div>
             </div>
