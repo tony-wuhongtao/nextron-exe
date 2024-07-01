@@ -38,3 +38,16 @@ $ yarn build (or `npm run build` or `pnpm run build`)
 ```
 
 ## 必须使用Admin的cmd进行build！！！
+
+## 注意服务器端的ollama和stable diffusion都需要打开cors
+
+### ollama linux版 打开方法：
+system service 文件里加
+Environment="OLLAMA_ORIGINS=*"
+
+### sd webui linux版 打开方法：
+webui-user.sh
+
+export COMMANDLINE_ARGS="--api --listen --xformers --enable-insecure-extension-access --cors-allow-origins "*""
+
+--cors-allow-origins "*"     为新加
